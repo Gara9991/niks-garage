@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "NIK's GARAGE | Tesla Specialist & Premium Service",
   description: "Erleben Sie den besten und modernsten Service für Ihren Tesla. Spezialist für Elektroautos, Tesla, NIO und MEYLE. Buchen Sie jetzt Ihren Termin.",
   keywords: "Tesla Werkstatt, NIK's GARAGE, Tesla Service, Elektroauto Reparatur, NIO, MEYLE, Refurbished Teile",
+  appleWebApp: {
+    title: "Niks Garage",
+  },
 };
 
 export default function RootLayout({
