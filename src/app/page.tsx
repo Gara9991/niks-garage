@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const HERO_SLIDES = [
   {
@@ -72,23 +73,9 @@ function useScrollReveal() {
 }
 
 export default function Home() {
-  const [theme, setTheme] = useState('dark');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [contactFABOpen, setContactFABOpen] = useState(false);
 
   useScrollReveal();
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -99,66 +86,6 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {/* ── Navigation ── */}
-      <nav className={`${styles.nav} ${isScrolled ? styles.navScrolled : ''} ${mobileMenuOpen ? styles.navMobileOpen : ''}`}>
-        <div className={styles.navInner}>
-          <div className={styles.logo}>
-            <Image src="/images/logo.png" alt="NIK's GARAGE" width={140} height={45} style={{ objectFit: 'contain' }} priority />
-          </div>
-          <div className={styles.desktopLinks}>
-            <a href="#about">Über uns</a>
-            <a href="#services">Leistungen</a>
-            <a href="#process">Ablauf</a>
-            <a href="#locations">Standorte</a>
-            <a href="#contact">Kontakt</a>
-          </div>
-          <div className={styles.navActions}>
-            <button onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} className={styles.themeToggleBtn} aria-label="Theme umschalten">
-              <div className={styles.themeTrack}>
-                <div className={`${styles.themeThumb} ${theme === 'light' ? styles.themeThumbLight : ''}`}>
-                  {theme === 'dark' ? (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                  ) : (
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
-                  )}
-                </div>
-              </div>
-            </button>
-            <a href="tel:091195036398" className={styles.navPhone}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              <span>0911 / 950 363 98</span>
-            </a>
-            <button onClick={() => setMobileMenuOpen(o => !o)} className={styles.burger} aria-label="Menü">
-              <span className={`${styles.bLine} ${mobileMenuOpen ? styles.bOpen1 : ''}`} />
-              <span className={`${styles.bLine} ${mobileMenuOpen ? styles.bOpen2 : ''}`} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* ── High-End Mobile Menu overlay ── */}
-      <div className={`${styles.mobileOverlay} ${mobileMenuOpen ? styles.mobileOpen : ''}`}>
-        <div className={styles.mobileInner}>
-          <div className={styles.mobileLinks}>
-            <span className={styles.mobileLabel}>Navigation</span>
-            {['Über uns:#about', 'Leistungen:#services', 'Ablauf:#process', 'Standorte:#locations', 'Kontakt:#contact'].map((item, i) => {
-              const [label, href] = item.split(':');
-              return (
-                <a key={i} href={href} onClick={() => setMobileMenuOpen(false)} style={{ transitionDelay: `${0.1 + (i * 0.05)}s` }} className={mobileMenuOpen ? styles.mobileLinkAnim : ''}>
-                  {label}
-                </a>
-              );
-            })}
-          </div>
-          
-          <div className={`${styles.mobileFooter} ${mobileMenuOpen ? styles.mobileLinkAnim : ''}`} style={{ transitionDelay: '0.4s' }}>
-            <span className={styles.mobileLabel}>Direktkontakt</span>
-            <a href="tel:091195036398" className={styles.mobilePhoneBig}>0911 / 950 363 98</a>
-            <a href="mailto:kontakt@niks-garage.com" className={styles.mobileMailText}>kontakt@niks-garage.com</a>
-          </div>
-        </div>
-      </div>
-
       {/* ── HERO ── */}
       <header className={styles.hero}>
         <div className={styles.heroSlides}>
@@ -174,7 +101,7 @@ export default function Home() {
           <h1 key={`t${currentSlide}`} className={styles.heroH1}>{HERO_SLIDES[currentSlide].title}</h1>
           <p key={`s${currentSlide}`} className={styles.heroP}>{HERO_SLIDES[currentSlide].subtitle}</p>
           <div className={styles.heroBtns}>
-            <a href="tel:091195036398" className={styles.heroBtn}>Termin vereinbaren</a>
+            <Link href="/kontakt" className={styles.heroBtn}>Termin vereinbaren</Link>
             <a href="#services" className={styles.heroBtnGhost}>Leistungen ansehen</a>
           </div>
         </div>
@@ -355,89 +282,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* ── Footer ── */}
-      <footer className={styles.footer}>
-        <div className={styles.container}>
-          <div className={`${styles.footerGrid} ${styles.reveal}`}>
-            <div className={styles.footerBrand}>
-              <Image src="/images/logo.png" alt="NIK's GARAGE" width={180} height={60} style={{ objectFit: 'contain' }} className={styles.footerLogo} />
-              <p className={styles.footerTagline}>Erfahrung, Leidenschaft und ein bundesweites Partner-Netzwerk für Tesla, NIO und weitere Fabrikate.</p>
-            </div>
-            
-            <div className={styles.footerNav}>
-              <div className={styles.footerCol}>
-                <h4>KONTAKT</h4>
-                <a href="tel:091195036398">0911 - 950 363 98</a>
-                <a href="mailto:info@niks-garage.com">info@niks-garage.com</a>
-                <p>Nürnberg & Bundesweit</p>
-              </div>
-              <div className={styles.footerCol}>
-                <h4>UNTERNEHMEN</h4>
-                <a href="https://niks-garage-concept.com" target="_blank" rel="noopener noreferrer">NIK's CONCEPT</a>
-                <a href="https://www.evinity-gmbh.com" target="_blank" rel="noopener noreferrer">EVINITY GmbH</a>
-                <a href="#">Jobs & Karriere</a>
-              </div>
-              <div className={styles.footerCol}>
-                <h4>RECHTLICHES</h4>
-                <a href="#">Impressum</a>
-                <a href="#">Datenschutz</a>
-                <a href="#">AGB</a>
-              </div>
-              <div className={styles.footerCol}>
-                <h4>SOCIAL</h4>
-                <a href="https://instagram.com/niks_garage_offiziell" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="#">LinkedIn</a>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-            <p className={styles.copy}>&copy; {new Date().getFullYear()} NIK'S GARAGE. Electrified. Qualified. — Ihr NIK & Partner-Team</p>
-            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className={styles.backToTop}>BACK TO TOP ↑</a>
-          </div>
-        </div>
-      </footer>
-
-      {/* ── Floating Contact FAB & Full-Screen Overlay ── */}
-      <div 
-        className={`${styles.fabOverlay} ${contactFABOpen ? styles.fabOverlayOpen : ''}`} 
-        onClick={() => setContactFABOpen(false)}
-        aria-hidden="true"
-      ></div>
-      <div className={`${styles.fabContainer} ${contactFABOpen ? styles.fabOpen : ''}`}>
-        <div className={styles.fabPanel}>
-          <button className={styles.fabClose} onClick={() => setContactFABOpen(false)}>×</button>
-          <h5>WERKSTATT-TERMINE</h5>
-          <p>
-            Unsere WERKSTATT-TERMINE vergeben wir ausschließlich nach persönlicher Rücksprache mit der Service-Leitung und anschließender Vereinbarung und Buchung nach gemeinsamer Terminfindung.
-          </p>
-          <div className={styles.fabPhoneBox}>
-            <span className={styles.fabPhoneLabel}>Rufen Sie uns an:</span>
-            <a href="tel:015227649976" className={styles.fabPhoneLink}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              01522 / 764 9976
-            </a>
-          </div>
-          <div className={styles.fabHours}>
-            <strong>SPRECHZEITEN:</strong>
-            Mo-Fr: 8:00-9:00 Uhr<br />
-            Mo-Do: 14:00-17:00 Uhr
-          </div>
-        </div>
-        
-        <button 
-          className={styles.fabButton}
-          onClick={() => setContactFABOpen(!contactFABOpen)}
-          aria-label="Kontakt & Termine"
-        >
-          {contactFABOpen ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          ) : (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          )}
-        </button>
-      </div>
     </main>
   );
 }

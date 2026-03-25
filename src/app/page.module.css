@@ -1059,22 +1059,29 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
+   TABLET / SMALL LAPTOP — Early Nav Breakpoint
+══════════════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+   .desktopLinks {
+      display: none;
+   }
+   .navPhone {
+      display: none;
+   }
+   .burger {
+      display: flex;
+   }
+}
+
+/* ══════════════════════════════════════════════════════════════
    MOBILE — Complete pixel-perfect override
 ══════════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
    /* Nav */
-   .desktopLinks {
-      display: none;
-   }
+   /* (nav logic moved to 1100px above) */
 
-   .navPhone {
-      display: none;
-   }
-
-   .burger {
-      display: flex;
-   }
+   /* Hero */
 
 
 
