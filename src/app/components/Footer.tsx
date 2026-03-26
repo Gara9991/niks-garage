@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import styles from "../page.module.css";
+import { analytics } from "@/lib/analytics";
 
 export default function Footer() {
   return (
@@ -15,26 +17,32 @@ export default function Footer() {
 
           <div className={styles.footerNav}>
             <div className={styles.footerCol}>
+              <h4>LEISTUNGEN</h4>
+              <Link href="/tesla-specialist">TESLA Specialist</Link>
+              <Link href="/nio-servicecenter">NIO ServiceCenter</Link>
+              <Link href="/refurbished">Neu oder Refurbished?</Link>
+            </div>
+            <div className={styles.footerCol}>
               <h4>KONTAKT</h4>
-              <a href="tel:091195036398">0911 - 950 363 98</a>
-              <a href="mailto:info@niks-garage.com">info@niks-garage.com</a>
+              <a href="tel:091195036398" onClick={() => analytics.clickPhone("091195036398", "footer")}>0911 - 950 363 98</a>
+              <a href="mailto:info@niks-garage.com" onClick={() => analytics.clickEmail("footer")}>info@niks-garage.com</a>
               <p>Nürnberg &amp; Bundesweit</p>
             </div>
             <div className={styles.footerCol}>
               <h4>UNTERNEHMEN</h4>
               <a href="https://niks-garage-concept.com" target="_blank" rel="noopener noreferrer">NIK&apos;s CONCEPT</a>
               <a href="https://www.evinity-gmbh.com" target="_blank" rel="noopener noreferrer">EVINITY GmbH</a>
-              <a href="#">Jobs &amp; Karriere</a>
+              <Link href="/jobs">Jobs &amp; Karriere</Link>
             </div>
             <div className={styles.footerCol}>
               <h4>RECHTLICHES</h4>
-              <a href="#">Impressum</a>
-              <a href="#">Datenschutz</a>
+              <Link href="/impressum">Impressum</Link>
+              <Link href="/datenschutz">Datenschutz</Link>
               <a href="#">AGB</a>
             </div>
             <div className={styles.footerCol}>
               <h4>SOCIAL</h4>
-              <a href="https://instagram.com/niks_garage_offiziell" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://instagram.com/niks_garage_offiziell" target="_blank" rel="noopener noreferrer" onClick={() => analytics.clickExternal("https://instagram.com/niks_garage_offiziell", "Instagram")}>Instagram</a>
               <a href="#">LinkedIn</a>
             </div>
           </div>

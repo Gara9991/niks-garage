@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
 import styles from "./kontakt.module.css";
+import { analytics } from "@/lib/analytics";
 
 const VEHICLE_BRANDS = [
   { id: "tesla", label: "Tesla", sub: "Model S · 3 · X · Y" },
@@ -135,6 +136,7 @@ export default function KontaktPage() {
   }, [step, brand, model, customBrand, selectedServices, selectedLocation, name, email, phone]);
 
   const handleSubmit = () => {
+    analytics.formSubmit("servicetermin");
     setSubmitted(true);
     goTo(TOTAL - 1);
   };
@@ -279,7 +281,7 @@ export default function KontaktPage() {
                   </div>
                   <h3>Persönliche Beratung vorab</h3>
                   <p>Unsere <strong>WERKSTATT-TERMINE</strong> vergeben wir ausschließlich nach persönlicher Rücksprache mit der Service-Leitung.</p>
-                  <a href="tel:015227649976" className={styles.mandatoryCallBtn}>
+                  <a href="tel:015227649976" className={styles.mandatoryCallBtn} onClick={() => analytics.clickPhone("015227649976", "kontakt_beratung")}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '10px', color: 'var(--accent)'}}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     01522 / 764 9976
                   </a>

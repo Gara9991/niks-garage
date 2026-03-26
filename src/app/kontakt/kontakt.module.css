@@ -26,7 +26,7 @@
 .formContainer {
   position: relative;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1380px;
   background: var(--bg-primary);
   border-radius: 32px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -89,6 +89,9 @@
   color: var(--text-primary);
   margin: 0 0 12px;
   line-height: 1.2;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: break-word;
 }
 
 .sidebarSub {

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "../page.module.css";
+import { analytics } from "@/lib/analytics";
 
 export default function ContactFAB() {
   const [open, setOpen] = useState(false);
@@ -15,14 +16,14 @@ export default function ContactFAB() {
       />
       <div className={`${styles.fabContainer} ${open ? styles.fabOpen : ""}`}>
         <div className={styles.fabPanel}>
-          <button className={styles.fabClose} onClick={() => setOpen(false)}>×</button>
+          <button className={styles.fabClose} onClick={() => { setOpen(false); analytics.fabClose(); }}>×</button>
           <h5>WERKSTATT-TERMINE</h5>
           <p>
             Unsere WERKSTATT-TERMINE vergeben wir ausschließlich nach persönlicher Rücksprache mit der Service-Leitung und anschließender Vereinbarung und Buchung nach gemeinsamer Terminfindung.
           </p>
           <div className={styles.fabPhoneBox}>
             <span className={styles.fabPhoneLabel}>Rufen Sie uns an:</span>
-            <a href="tel:015227649976" className={styles.fabPhoneLink}>
+            <a href="tel:015227649976" className={styles.fabPhoneLink} onClick={() => analytics.clickPhone("015227649976", "fab")}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
               01522 / 764 9976
             </a>
@@ -36,7 +37,7 @@ export default function ContactFAB() {
 
         <button
           className={styles.fabButton}
-          onClick={() => setOpen(!open)}
+          onClick={() => { const next = !open; setOpen(next); next ? analytics.fabOpen() : analytics.fabClose(); }}
           aria-label="Kontakt & Termine"
         >
           {open ? (
