@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Kontakt & Termin vereinbaren | Nik\'s Garage Nürnberg',
     description: 'Werkstatt-Termin bei Nik\'s Garage vereinbaren – freie Tesla Werkstatt in Nürnberg. Tesla, NIO & Oldtimer.',
-    url: 'https://www.niks-garage-nuernberg.de/kontakt',
+    url: 'https://niks-garage-nuernberg.de/kontakt',
     images: [{ url: '/images/hero_clean.png', width: 1200, height: 630 }],
   }
 };

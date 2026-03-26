@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Refurbished Ersatzteile – Tesla & E-Auto | Nik's Garage",
     description: "Geprüfte Refurbished-Teile für Tesla, NIO & Oldtimer. Nachhaltig und zeitwertgerecht.",
-    url: 'https://www.niks-garage-nuernberg.de/refurbished',
+    url: 'https://niks-garage-nuernberg.de/refurbished',
     images: [{ url: '/images/parts_clean.png', width: 1200, height: 630 }],
   }
 };

@@ -10,7 +10,7 @@ import CookieConsent from "./components/CookieConsent";
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.niks-garage-nuernberg.de'),
+  metadataBase: new URL('https://niks-garage-nuernberg.de'),
   title: {
     template: '%s | Nik\'s Garage Nürnberg',
     default: "Nik's Garage – Freie Tesla Werkstatt Nürnberg | NIO & Oldtimer",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Nik's Garage – Freie Tesla Werkstatt Nürnberg",
     description: "Freie Tesla Werkstatt Nürnberg: MEYLE HD Fahrwerke, Hochvolt-Diagnose, NIO ServiceCenter & Oldtimer. ★ 4,8 Google-Sterne.",
-    url: 'https://www.niks-garage-nuernberg.de',
+    url: 'https://niks-garage-nuernberg.de',
     siteName: "Nik's Garage Tesla Werkstatt Nürnberg",
     images: [
       {
@@ -84,9 +84,9 @@ const jsonLd = {
   "@type": ["AutoRepair", "LocalBusiness"],
   "name": "Nik's Garage",
   "alternateName": "NIK'S GARAGE – Electrified. Qualified.",
-  "image": "https://www.niks-garage-nuernberg.de/images/hero_clean.png",
-  "@id": "https://www.niks-garage-nuernberg.de",
-  "url": "https://www.niks-garage-nuernberg.de",
+  "image": "https://niks-garage-nuernberg.de/images/hero_clean.png",
+  "@id": "https://niks-garage-nuernberg.de",
+  "url": "https://niks-garage-nuernberg.de",
   "telephone": "015227649976",
   "email": "kontakt@niks-garage-nuernberg.de",
   "address": {

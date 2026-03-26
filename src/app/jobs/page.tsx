@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Karriere – Kfz-Mechatroniker gesucht | Nik's Garage",
     description: "Werde Teil von Nik's Garage: Kfz-Mechatroniker (m/w/d) für Tesla, NIO & Oldtimer in Nürnberg gesucht.",
-    url: 'https://www.niks-garage-nuernberg.de/jobs',
+    url: 'https://niks-garage-nuernberg.de/jobs',
     images: [{ url: '/images/jobs_hero.png', width: 1200, height: 630 }],
   }
 };

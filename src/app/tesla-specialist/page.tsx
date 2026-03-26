@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Freie Tesla Werkstatt Nürnberg | Nik's Garage",
     description: "Achsvermessung, MEYLE HD Fahrwerke, Drive Unit & Hochvolt-Diagnose für Ihren Tesla.",
-    url: 'https://www.niks-garage-nuernberg.de/tesla-specialist',
+    url: 'https://niks-garage-nuernberg.de/tesla-specialist',
     images: [{ url: '/images/service_clean.png', width: 1200, height: 630 }],
   }
 };

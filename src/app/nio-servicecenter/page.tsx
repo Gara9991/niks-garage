@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NIO ServiceCenter – Autorisierte Werkstatt | Nik's Garage",
     description: "Autorisiertes NIO ServiceCenter in Nürnberg: Wartung, Inspektion & Instandsetzung für ET5, ET7, EL6 & EL7.",
-    url: 'https://www.niks-garage-nuernberg.de/nio-servicecenter',
+    url: 'https://niks-garage-nuernberg.de/nio-servicecenter',
     images: [{ url: '/images/nio_service.png', width: 1200, height: 630 }],
   }
 };
