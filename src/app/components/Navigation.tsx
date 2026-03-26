@@ -61,9 +61,9 @@ export default function Navigation() {
                 </div>
               </div>
             </button>
-            <a href="tel:091195036398" className={styles.navPhone} onClick={() => analytics.clickPhone("091195036398", "nav")}>
+            <a href="tel:017670037698" className={styles.navPhone} onClick={() => analytics.clickPhone("017670037698", "nav")}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              <span>0911 / 950 363 98</span>
+              <span>0176 / 700 376 98</span>
             </a>
             <button onClick={() => setMobileMenuOpen((o) => !o)} className={styles.burger} aria-label="Menü">
               <span className={`${styles.bLine} ${mobileMenuOpen ? styles.bOpen1 : ""}`} />
@@ -92,8 +92,8 @@ export default function Navigation() {
           </div>
           <div className={`${styles.mobileFooter} ${mobileMenuOpen ? styles.mobileLinkAnim : ""}`} style={{ transitionDelay: "0.4s" }}>
             <span className={styles.mobileLabel}>Direktkontakt</span>
-            <a href="tel:091195036398" className={styles.mobilePhoneBig}>0911 / 950 363 98</a>
-            <a href="mailto:kontakt@niks-garage.com" className={styles.mobileMailText}>kontakt@niks-garage.com</a>
+            <a href="tel:017670037698" className={styles.mobilePhoneBig}>0176 / 700 376 98</a>
+            <a href="mailto:kontakt@niks-garage-nuernberg.de" className={styles.mobileMailText}>kontakt@niks-garage-nuernberg.de</a>
           </div>
         </div>
       </div>

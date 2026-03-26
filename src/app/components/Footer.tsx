@@ -24,8 +24,8 @@ export default function Footer() {
             </div>
             <div className={styles.footerCol}>
               <h4>KONTAKT</h4>
-              <a href="tel:091195036398" onClick={() => analytics.clickPhone("091195036398", "footer")}>0911 - 950 363 98</a>
-              <a href="mailto:info@niks-garage.com" onClick={() => analytics.clickEmail("footer")}>info@niks-garage.com</a>
+              <a href="tel:017670037698" onClick={() => analytics.clickPhone("017670037698", "footer")}>0176 - 700 376 98</a>
+              <a href="mailto:kontakt@niks-garage-nuernberg.de" onClick={() => analytics.clickEmail("footer")}>kontakt@niks-garage-nuernberg.de</a>
               <p>Nürnberg &amp; Bundesweit</p>
             </div>
             <div className={styles.footerCol}>
@@ -40,16 +40,23 @@ export default function Footer() {
               <Link href="/datenschutz">Datenschutz</Link>
               <a href="#">AGB</a>
             </div>
-            <div className={styles.footerCol}>
-              <h4>SOCIAL</h4>
-              <a href="https://instagram.com/niks_garage_offiziell" target="_blank" rel="noopener noreferrer" onClick={() => analytics.clickExternal("https://instagram.com/niks_garage_offiziell", "Instagram")}>Instagram</a>
-              <a href="#">LinkedIn</a>
-            </div>
           </div>
         </div>
 
         <div className={styles.footerBottom}>
           <p className={styles.copy}>&copy; {new Date().getFullYear()} NIK&apos;S GARAGE. Electrified. Qualified. — Ihr NIK &amp; Partner-Team</p>
+          <p className={styles.copy} style={{ opacity: 0.5 }}>
+            Mit ❤ gemacht von{' '}
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://www.adsxperts.de"
+              style={{ color: 'inherit', textDecoration: 'underline', textUnderlineOffset: '3px' }}
+            >
+              adsXperts.de - SEO / Webdesign Marketing Agentur
+            </a>{' '}
+            2026
+          </p>
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} className={styles.backToTop}>BACK TO TOP ↑</a>
         </div>
       </div>

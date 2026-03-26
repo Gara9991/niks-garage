@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useTransition } from "react";
 import Link from "next/link";
 import styles from "./kontakt.module.css";
 import { analytics } from "@/lib/analytics";
+import { submitContactForm } from "./actions";
 
 const VEHICLE_BRANDS = [
   { id: "tesla", label: "Tesla", sub: "Model S · 3 · X · Y" },
@@ -112,6 +113,8 @@ export default function KontaktPage() {
 
   // Step 5: Done
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const goTo = useCallback((target: number) => {
     setStep(target);
@@ -137,8 +140,31 @@ export default function KontaktPage() {
 
   const handleSubmit = () => {
     analytics.formSubmit("servicetermin");
-    setSubmitted(true);
-    goTo(TOTAL - 1);
+    setSubmitError("");
+    startTransition(async () => {
+      const result = await submitContactForm({
+        brand,
+        model,
+        customBrand,
+        year,
+        selectedServices,
+        serviceNote,
+        selectedLocation,
+        locationCity: LOCATIONS.find(l => l.id === selectedLocation)?.city || "",
+        name,
+        email,
+        phone,
+        preferredDate,
+        message,
+        serviceLabels: selectedServices.map(id => SERVICE_CATEGORIES.find(s => s.id === id)?.label || id),
+      });
+      if (result.success) {
+        setSubmitted(true);
+        goTo(TOTAL - 1);
+      } else {
+        setSubmitError(result.error || "Ein Fehler ist aufgetreten.");
+      }
+    });
   };
 
   const models = brand === "tesla" ? TESLA_MODELS : brand === "nio" ? NIO_MODELS : [];
@@ -281,9 +307,9 @@ export default function KontaktPage() {
                   </div>
                   <h3>Persönliche Beratung vorab</h3>
                   <p>Unsere <strong>WERKSTATT-TERMINE</strong> vergeben wir ausschließlich nach persönlicher Rücksprache mit der Service-Leitung.</p>
-                  <a href="tel:015227649976" className={styles.mandatoryCallBtn} onClick={() => analytics.clickPhone("015227649976", "kontakt_beratung")}>
+                  <a href="tel:017670037698" className={styles.mandatoryCallBtn} onClick={() => analytics.clickPhone("017670037698", "kontakt_beratung")}>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '10px', color: 'var(--accent)'}}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    01522 / 764 9976
+                    0176 / 700 376 98
                   </a>
                 </div>
                 
@@ -348,7 +374,58 @@ export default function KontaktPage() {
                   </div>
                   <div className={styles.inputGroup}>
                     <label>Wunschtermin (optional)</label>
-                    <input type="date" className={styles.input} value={preferredDate} onChange={(e) => setPreferredDate(e.target.value)} />
+                    <div className={styles.datePickerWrap}>
+                      {(() => {
+                        const chips: { label: string; value: string }[] = [];
+                        const today = new Date();
+                        const dayNames = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+                        const monthNames = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+                        for (let i = 1; i <= 14; i++) {
+                          const d = new Date(today);
+                          d.setDate(today.getDate() + i);
+                          if (d.getDay() === 0 || d.getDay() === 6) continue;
+                          const iso = d.toISOString().split('T')[0];
+                          chips.push({ label: `${dayNames[d.getDay()]}, ${d.getDate()}. ${monthNames[d.getMonth()]}`, value: iso });
+                        }
+                        return chips.slice(0, 8).map(c => (
+                          <button
+                            key={c.value}
+                            type="button"
+                            className={`${styles.dateChip} ${preferredDate === c.value ? styles.dateChipActive : ''}`}
+                            onClick={() => setPreferredDate(preferredDate === c.value ? '' : c.value)}
+                          >
+                            {c.label}
+                          </button>
+                        ));
+                      })()}
+                      <button
+                        type="button"
+                        className={`${styles.dateChip} ${styles.dateChipCustom} ${preferredDate && ![...Array(14)].some((_, i) => { const d = new Date(); d.setDate(d.getDate() + i + 1); return d.toISOString().split('T')[0] === preferredDate && d.getDay() !== 0 && d.getDay() !== 6; }) ? '' : ''}`}
+                        onClick={() => {
+                          const inp = document.getElementById('dateFallback') as HTMLInputElement;
+                          inp?.showPicker?.();
+                          inp?.focus();
+                        }}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                        Anderes Datum
+                      </button>
+                      <input
+                        id="dateFallback"
+                        type="date"
+                        className={styles.dateHiddenInput}
+                        value={preferredDate}
+                        onChange={(e) => setPreferredDate(e.target.value)}
+                        min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
+                      />
+                    </div>
+                    {preferredDate && (
+                      <div className={styles.dateSelected}>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                        <span>{new Date(preferredDate + 'T00:00:00').toLocaleDateString('de-DE', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                        <button type="button" className={styles.dateClear} onClick={() => setPreferredDate('')}>✕</button>
+                      </div>
+                    )}
                   </div>
                   <div className={styles.inputGroup} style={{ gridColumn: "1 / -1" }}>
                     <label>Nachricht (optional)</label>
@@ -366,18 +443,28 @@ export default function KontaktPage() {
             {step === 5 && (
               <div className={styles.stepPane} key="s5">
                 {submitted ? (
-                  <div className={styles.stepHead} style={{ marginTop: 24 }}>
+                  <div className={styles.successScreen}>
                     <div className={styles.successIcon}>
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
-                    <h2>Anfrage versendet.</h2>
-                    <p className={styles.cardSub} style={{ marginTop: 16, fontSize: '1.05rem' }}>
+                    <h2 className={styles.successTitle}>Anfrage versendet</h2>
+                    <p className={styles.successText}>
                       Vielen Dank, {name.split(' ')[0]}! Wir melden uns in Kürze telefonisch bei Ihnen zur Terminabstimmung.
                     </p>
+
+                    {email && (
+                      <div className={styles.successMailNote}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        <span>Bestätigung an <strong>{email}</strong> gesendet</span>
+                      </div>
+                    )}
                     
                     <div className={styles.successActions}>
-                      <Link href="/" className={styles.btnSecondary} style={{ padding: '16px 32px', background: 'var(--bg-card)', borderRadius: 980, border: '1px solid rgba(150,150,150,0.2)' }}>Zur Startseite</Link>
-                      <a href="tel:091195036398" className={styles.btnPrimary}>Zentrale Anrufen</a>
+                      <Link href="/" className={styles.successBtnSecondary}>Zur Startseite</Link>
+                      <a href="tel:017670037698" className={styles.successBtnPrimary}>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        Zentrale anrufen
+                      </a>
                     </div>
                   </div>
                 ) : (
@@ -433,10 +520,16 @@ export default function KontaktPage() {
                   Zusammenfassung
                 </button>
               ) : (
-                <button className={styles.btnPrimary} onClick={handleSubmit} type="button">
-                  Anfrage absenden
+                <button className={styles.btnPrimary} onClick={handleSubmit} disabled={isPending} type="button">
+                  {isPending ? "Wird gesendet…" : "Anfrage absenden"}
                 </button>
               )}
+            </div>
+          )}
+
+          {submitError && (
+            <div style={{ padding: '12px 24px', margin: '0 24px 16px', background: 'rgba(255,60,60,0.1)', border: '1px solid rgba(255,60,60,0.25)', borderRadius: 12, color: '#ff6b6b', fontSize: '0.9rem', textAlign: 'center' }}>
+              {submitError}
             </div>
           )}
 

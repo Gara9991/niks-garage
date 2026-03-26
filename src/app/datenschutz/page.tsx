@@ -29,8 +29,8 @@ export default function DatenschutzPage() {
               EVINITY GmbH (ehemals AutoCenter Langwasser GmbH)<br />
               Niklas Persch (Geschäftsführer)<br />
               Witschelstraße 60, 90431 Nürnberg<br />
-              Telefon: +49 1522 – 7649976<br />
-              E-Mail: kontakt@niks-garage.com
+              Telefon: +49 176 – 70037698<br />
+              E-Mail: kontakt@niks-garage-nuernberg.de
             </p>
           </section>
 

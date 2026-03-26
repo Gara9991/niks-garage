@@ -4,13 +4,17 @@ import Link from "next/link";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
-  title: "Refurbished Tesla & E-Auto Ersatzteile | Nik's Garage Nürnberg",
-  description: "Reparatur statt teurer Neukauf: Nach Herstellervorgaben geprüfte Refurbished-Ersatzteile und Drive Units für Tesla & NIO. Ressourcenschonend und sicher.",
+  title: "Refurbished Ersatzteile – Tesla & E-Auto",
+  description: "Geprüfte Refurbished-Ersatzteile für Tesla & NIO: Drive Units, Fahrwerk & mehr. Nachhaltig, sicher & günstiger als Neuteile.",
   keywords: ["Refurbished Tesla Teile Nürnberg", "Tesla Drive Unit Reparatur", "Tesla Ersatzteile Refurbished", "Elektroauto Werkstatt Nürnberg Nachhaltig", "Oldtimer Ersatzteile Nürnberg", "Niks Garage Refurbished"],
+  alternates: {
+    canonical: '/refurbished',
+  },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Refurbished Tesla Ersatzteile & Drive Units | Nik's Garage",
-    description: "Zeitwertgerechte und nachhaltige Reparaturen durch geprüfte Refurbished-Teile für Tesla, NIO und Oldtimer.",
-    url: 'https://www.niks-garage.com/refurbished',
+    title: "Refurbished Ersatzteile – Tesla & E-Auto | Nik's Garage",
+    description: "Geprüfte Refurbished-Teile für Tesla, NIO & Oldtimer. Nachhaltig und zeitwertgerecht.",
+    url: 'https://www.niks-garage-nuernberg.de/refurbished',
     images: [{ url: '/images/parts_clean.png', width: 1200, height: 630 }],
   }
 };

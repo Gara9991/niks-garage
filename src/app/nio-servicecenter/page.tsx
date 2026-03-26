@@ -4,13 +4,17 @@ import Link from "next/link";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
-  title: "NIO ServiceCenter Nürnberg | Offizielle Werkstatt - Nik's Garage",
-  description: "Nik's Garage ist Ihr autorisiertes NIO ServiceCenter in Nürnberg. Komplettservice, Wartung, Inspektion & Unfallinstandsetzung für NIO ET5, ET7, EL7 und EL6.",
+  title: "NIO ServiceCenter – Autorisierte Werkstatt",
+  description: "Autorisiertes NIO ServiceCenter in Nürnberg: Wartung, Inspektion & Instandsetzung für ET5, ET7, EL6 & EL7 bei Nik's Garage.",
   keywords: ["NIO ServiceCenter Nürnberg", "NIO Werkstatt Nürnberg", "NIO Service Deutschland", "ET7 Service", "ET5 Werkstatt Nürnberg", "EL7 Inspektion", "EL6 Wartung", "Niks Garage NIO"],
+  alternates: {
+    canonical: '/nio-servicecenter',
+  },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "NIO ServiceCenter Nürnberg | Offizielle Werkstatt",
-    description: "Autorisiertes NIO ServiceCenter in Nürnberg. Umfassender System-Service und Instandsetzung von ET5, ET7, EL6 und EL7.",
-    url: 'https://www.niks-garage.com/nio-servicecenter',
+    title: "NIO ServiceCenter – Autorisierte Werkstatt | Nik's Garage",
+    description: "Autorisiertes NIO ServiceCenter in Nürnberg: Wartung, Inspektion & Instandsetzung für ET5, ET7, EL6 & EL7.",
+    url: 'https://www.niks-garage-nuernberg.de/nio-servicecenter',
     images: [{ url: '/images/nio_service.png', width: 1200, height: 630 }],
   }
 };

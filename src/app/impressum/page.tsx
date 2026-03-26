@@ -40,8 +40,8 @@ export default function ImpressumPage() {
             <h2>Kontakt</h2>
             <p>
               Witschelstraße 60 | 90431 Nürnberg<br />
-              Telefon: +49 1522 – 7649976<br />
-              E-Mail: kontakt@niks-garage.com
+              Telefon: +49 176 – 70037698<br />
+              E-Mail: kontakt@niks-garage-nuernberg.de
             </p>
           </section>
 

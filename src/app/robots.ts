@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/'],
     },
-    sitemap: 'https://www.niks-garage.com/sitemap.xml',
+    sitemap: 'https://www.niks-garage-nuernberg.de/sitemap.xml',
   };
 }

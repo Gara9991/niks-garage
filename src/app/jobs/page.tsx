@@ -4,13 +4,17 @@ import Link from "next/link";
 import styles from "./jobs.module.css";
 
 export const metadata: Metadata = {
-  title: "Jobs & Karriere | Tesla Mechatroniker gesucht - Nik's Garage",
-  description: "Starte deine Karriere als Kfz-Mechatroniker (m/w/d) in Nürnberg. Arbeite in unserer freien Tesla Werkstatt an E-Autos (Tesla, NIO) und Oldtimern.",
+  title: "Karriere – Kfz-Mechatroniker (m/w/d) gesucht",
+  description: "Kfz-Mechatroniker (m/w/d) in Nürnberg gesucht! Arbeite bei Nik's Garage an Tesla, NIO & Oldtimern. Jetzt bewerben.",
   keywords: ["Tesla Job Nürnberg", "Kfz Mechatroniker Stelle Tesla", "Tesla Werkstatt Karriere Nürnberg", "NIO Jobs Werkstatt", "Niks Garage Karriere"],
+  alternates: {
+    canonical: '/jobs',
+  },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Jobs & Karriere | Tesla Mechatroniker gesucht - Nik's Garage",
-    description: "Werde Teil von Nik's Garage: Der aufstrebenden freien Tesla Werkstatt in Nürnberg. Wir suchen Mechaniker (m/w/d).",
-    url: 'https://www.niks-garage.com/jobs',
+    title: "Karriere – Kfz-Mechatroniker gesucht | Nik's Garage",
+    description: "Werde Teil von Nik's Garage: Kfz-Mechatroniker (m/w/d) für Tesla, NIO & Oldtimer in Nürnberg gesucht.",
+    url: 'https://www.niks-garage-nuernberg.de/jobs',
     images: [{ url: '/images/jobs_hero.png', width: 1200, height: 630 }],
   }
 };
@@ -149,11 +153,11 @@ export default function Jobs() {
                 </div>
               </div>
 
-              <a href="tel:091195036398" className={styles.btnPrimary}>
+              <a href="tel:017670037698" className={styles.btnPrimary}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '10px'}}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 Sofort anrufen
               </a>
-              <a href="mailto:kontakt@niks-garage.com" className={styles.btnSecondary}>
+              <a href="mailto:kontakt@niks-garage-nuernberg.de" className={styles.btnSecondary}>
                 E-Mail schreiben
               </a>
             </div>

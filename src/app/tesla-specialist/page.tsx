@@ -4,13 +4,17 @@ import Link from "next/link";
 import styles from "../subpage.module.css";
 
 export const metadata: Metadata = {
-  title: "Tesla Werkstatt Nürnberg | Freier Spezialist - Nik's Garage",
-  description: "Ihre verlässliche, freie Tesla-Werkstatt in Nürnberg. Experten für Achsvermessung, MEYLE HD Fahrwerke, Drive Unit Reparatur und Hochvolt-Diagnosen. Jetzt Termin anfragen.",
+  title: "Freie Tesla Werkstatt – Service & Reparatur",
+  description: "Freie Tesla Werkstatt in Nürnberg: Achsvermessung, MEYLE HD Fahrwerke, Drive Unit Reparatur & Hochvolt-Diagnose. Jetzt Termin anfragen!",
   keywords: ["Tesla Werkstatt Nürnberg", "Tesla Service Nürnberg", "Freie Tesla Werkstatt", "Tesla Reparatur Nürnberg", "Tesla Querlenker MEYLE", "Model 3 Service Nürnberg", "Model Y Reparatur Nürnberg", "Niks Garage Tesla"],
+  alternates: {
+    canonical: '/tesla-specialist',
+  },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Tesla Werkstatt Nürnberg | Freier Spezialist - Nik's Garage",
-    description: "Ihre erfahrene, freie Tesla-Werkstatt in Nürnberg. Experten für Achsvermessung, MEYLE Fahrwerke, Drive Unit und Hochvolt.",
-    url: 'https://www.niks-garage.com/tesla-specialist',
+    title: "Freie Tesla Werkstatt Nürnberg | Nik's Garage",
+    description: "Achsvermessung, MEYLE HD Fahrwerke, Drive Unit & Hochvolt-Diagnose für Ihren Tesla.",
+    url: 'https://www.niks-garage-nuernberg.de/tesla-specialist',
     images: [{ url: '/images/service_clean.png', width: 1200, height: 630 }],
   }
 };

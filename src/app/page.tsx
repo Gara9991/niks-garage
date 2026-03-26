@@ -293,9 +293,9 @@ export default function Home() {
           <div className={`${styles.contactLeft} ${styles.reveal}`}>
             <span className={styles.tag}>KONTAKT</span>
             <h2>Jetzt Termin<br/>vereinbaren.</h2>
-            <a href="tel:091195036398" className={styles.bigPhone} onClick={() => analytics.clickPhone("091195036398", "contact_section")}>0911 / 950 363 98</a>
-            <a href="tel:015227649976" className={styles.altPhone} onClick={() => analytics.clickPhone("015227649976", "contact_section")}>Mobil: 01522 / 7649976</a>
-            <a href="mailto:kontakt@niks-garage.com" className={styles.contactMail} onClick={() => analytics.clickEmail("contact_section")}>kontakt@niks-garage.com</a>
+            <a href="tel:017670037698" className={styles.bigPhone} onClick={() => analytics.clickPhone("017670037698", "contact_section")}>0176 / 700 376 98</a>
+            <a href="tel:017670037698" className={styles.altPhone} onClick={() => analytics.clickPhone("017670037698", "contact_section")}>Mobil: 0176 / 700 376 98</a>
+            <a href="mailto:kontakt@niks-garage-nuernberg.de" className={styles.contactMail} onClick={() => analytics.clickEmail("contact_section")}>kontakt@niks-garage-nuernberg.de</a>
             <p className={styles.contactNote}>Bitte beachten Sie unsere Sprechzeiten. Ohne telefonische Terminvereinbarung können wir Ihnen vor Ort leider nicht weiterhelfen.</p>
           </div>
           <div className={`${styles.contactRight} ${styles.reveal}`}>
