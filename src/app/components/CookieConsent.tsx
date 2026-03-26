@@ -21,7 +21,7 @@ export default function CookieConsent() {
 
   const updateConsent = (state: "granted" | "denied") => {
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("set", "consent_update" as unknown as Date, {
+      window.gtag("consent" as "config", "update" as string, {
         analytics_storage: state,
         ad_storage: state,
       });
