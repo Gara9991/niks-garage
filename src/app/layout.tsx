@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import ContactFAB from "./components/ContactFAB";
 import Analytics from "./components/Analytics";
 import CookieConsent from "./components/CookieConsent";
+import ConstructionOverlay from "./components/ConstructionOverlay";
 
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"] });
 
@@ -172,6 +173,7 @@ export default function RootLayout({
         <Footer />
         <ContactFAB />
         <CookieConsent />
+        <ConstructionOverlay />
       </body>
     </html>
   );

@@ -1,0 +1,171 @@
+/* ==============================================================
+   Wird-umgebaut Fullscreen Overlay — Apple-clean.
+   - Rein clientseitig, kein Server-HTML, kein Crawler-Footprint.
+   - Keine Telefon-/E-Mail-Anzeige.
+================================================================= */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 80px);
+  background: #000000;
+  color: #f5f5f7;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  overflow: hidden;
+}
+
+.overlayVisible {
+  opacity: 1;
+}
+
+/* sehr subtiles Spotlight im Hintergrund */
+.bgGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(900px, 90vw);
+  height: min(900px, 90vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(226, 162, 51, 0.10) 0%, rgba(226, 162, 51, 0.04) 30%, transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+/* feines Grid-Pattern für Tech-Vibe (sehr dezent) */
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+              opacity 0.9s ease 0.1s;
+}
+
+.contentVisible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.logo {
+  margin-bottom: clamp(40px, 7vw, 72px);
+  opacity: 0.95;
+}
+
+.statusRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.6);
+  font-weight: 500;
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+
+.statusDot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e2a233;
+}
+
+.statusDot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: #e2a233;
+  opacity: 0.4;
+  animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  80%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+.title {
+  font-size: clamp(2.25rem, 7vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin: 0 0 clamp(20px, 3vw, 28px);
+  background: linear-gradient(180deg, #ffffff 0%, #b8b8bf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.55;
+  font-weight: 400;
+  color: rgba(245, 245, 247, 0.7);
+  max-width: 540px;
+  margin: 0;
+}
+
+/* unten zentrierte Markenzeile */
+.footer {
+  position: absolute;
+  bottom: clamp(24px, 4vw, 40px);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 247, 0.4);
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.6s;
+}
+
+.footerVisible {
+  opacity: 1;
+}
+
+.footerLine {
+  width: clamp(20px, 4vw, 40px);
+  height: 1px;
+  background: rgba(245, 245, 247, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .content,
+  .footer {
+    transition: none;
+  }
+  .statusDot::after {
+    animation: none;
+  }
+}
